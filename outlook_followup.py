@@ -2,6 +2,8 @@ import time
 import pandas as pd
 import win32com.client
 import re
+import tkinter as tk
+from tkinter import filedialog
 
 def insert_html_body(original_html, insert_text):
     """Inserts new HTML into the existing HTML body, ideally after the <body> tag."""
@@ -14,7 +16,7 @@ def insert_html_body(original_html, insert_text):
         # If no body tag found, just prepend
         return insert_text + original_html
 
-def send_followups(excel_filepath):
+def send_followups(excel_filepath, new_subject="Follow-up"):
     # Load data from Excel
     print(f"Loading data from {excel_filepath}...")
     try:
@@ -89,6 +91,9 @@ def send_followups(excel_filepath):
                 # Reply All to the found email
                 reply = found_email.ReplyAll()
 
+                # Replace the old subject with the new subject
+                reply.Subject = new_subject
+
                 # Follow-up message using the first name
                 followup_text = (
                     f"<p>Hi {first_name},</p>"
@@ -116,6 +121,20 @@ def send_followups(excel_filepath):
             print(f"Could not find a sent email for {email_id} in the Sent Items.")
 
 if __name__ == "__main__":
-    # Ensure you have 'contacts.xlsx' in the same directory, or provide the full path
-    excel_file = "contacts.xlsx"
-    send_followups(excel_file)
+    # Create a simple Tkinter root window and hide it
+    root = tk.Tk()
+    root.withdraw()
+
+    # Open a file selection dialog
+    print("Please select the Excel file containing the contacts...")
+    excel_file = filedialog.askopenfilename(
+        title="Select Excel File",
+        filetypes=[("Excel files", "*.xlsx *.xls")]
+    )
+
+    if not excel_file:
+        print("No file selected. Exiting.")
+    else:
+        # Set the desired new subject line here
+        new_subject_line = "Follow-up"
+        send_followups(excel_file, new_subject_line)
