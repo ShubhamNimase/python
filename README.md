@@ -8,6 +8,7 @@ This project contains a Python script (`outlook_followup.py`) that automates sen
 - Connects to the local Microsoft Outlook application via COM interface (`win32com`).
 - Searches the "Sent Items" folder for the *first* (oldest) email sent to each contact.
 - Uses "Reply All" to prepend a customized follow-up message addressing the person by their *first name*.
+- Replaces the old email subject line with a custom new subject line.
 - Enforces a 30-second delay between consecutive emails to prevent rate limiting or spam flags.
 - Ensures existing email HTML formatting is preserved by injecting the follow-up text directly after the `<body>` tag.
 
@@ -37,7 +38,7 @@ This project contains a Python script (`outlook_followup.py`) that automates sen
     ```
 
 2.  **Run the script**:
-    Ensure Microsoft Outlook is open and authenticated. Then run:
+    Ensure Microsoft Outlook is open and authenticated. You can edit the `new_subject_line` variable at the bottom of `outlook_followup.py` to set your desired subject. Then run:
     ```bash
     python outlook_followup.py
     ```

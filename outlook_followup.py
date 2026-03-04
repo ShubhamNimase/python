@@ -14,7 +14,7 @@ def insert_html_body(original_html, insert_text):
         # If no body tag found, just prepend
         return insert_text + original_html
 
-def send_followups(excel_filepath):
+def send_followups(excel_filepath, new_subject="Follow-up"):
     # Load data from Excel
     print(f"Loading data from {excel_filepath}...")
     try:
@@ -89,6 +89,9 @@ def send_followups(excel_filepath):
                 # Reply All to the found email
                 reply = found_email.ReplyAll()
 
+                # Replace the old subject with the new subject
+                reply.Subject = new_subject
+
                 # Follow-up message using the first name
                 followup_text = (
                     f"<p>Hi {first_name},</p>"
@@ -118,4 +121,6 @@ def send_followups(excel_filepath):
 if __name__ == "__main__":
     # Ensure you have 'contacts.xlsx' in the same directory, or provide the full path
     excel_file = "contacts.xlsx"
-    send_followups(excel_file)
+    # Set the desired new subject line here
+    new_subject_line = "Follow-up"
+    send_followups(excel_file, new_subject_line)
