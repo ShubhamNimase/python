@@ -30,7 +30,7 @@ This project contains a Python script (`outlook_followup.py`) that automates sen
 ## Usage
 
 1.  **Prepare the Excel file**:
-    The script expects an Excel file named `contacts.xlsx` in the same directory, containing at least two columns: `Name` and `Email ID`.
+    Create an Excel file with at least two columns: `Name` and `Email ID`. (You can name the file anything and place it anywhere on your device).
 
     *Optional*: You can run the included helper script to generate a sample file:
     ```bash
@@ -43,7 +43,10 @@ This project contains a Python script (`outlook_followup.py`) that automates sen
     python outlook_followup.py
     ```
 
-3.  **Process**:
+3.  **Select the File**:
+    A file selection dialog will appear. Browse to and select your Excel file containing the contacts.
+
+4.  **Process**:
     The script will output its progress to the console. For each contact, it will:
     - Search for the first sent email to their address.
     - If found, create a "Reply All" response.
