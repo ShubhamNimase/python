@@ -105,6 +105,9 @@ def send_followups(excel_filepath, new_subject="Follow-up"):
                 # Correctly insert the follow-up text into the existing HTML body
                 reply.HTMLBody = insert_html_body(reply.HTMLBody, followup_text)
 
+                #Turn on read receipt
+                mail.ReadReceiptRequested = True
+
                 # Send the email
                 reply.Send()
                 print(f"Successfully sent follow-up to {first_name} ({email_id}).")
